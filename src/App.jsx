@@ -13,7 +13,7 @@ const services = [
 ]
 
 function Brand({ footer = false }) {
-  return <a className={`brand${footer ? ' footer-brand' : ''}`} href="#inicio" aria-label="SEICO, inicio"><span className="brand-mark">S</span><span>SEICO<small>Servicio Integral de Computadoras</small></span></a>
+  return <a className={`brand-logo-link${footer ? ' footer-brand' : ''}`} href="#inicio" aria-label="SEICO, inicio"><span className="brand-logo-crop"><img src="/seico-logo.jpg" alt="SEICO | Servicio Integral de Computadoras" /></span></a>
 }
 
 function Header({ openChat }) {
@@ -130,7 +130,7 @@ function Contact() {
           </a>
           
           <div className="location-label">
-            <span>⌖</span> Bahía Blanca, Buenos Aires
+            <span>⌖</span>
           </div>
         </div>
         
