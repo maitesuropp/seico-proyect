@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 const instagramUrl = 'https://www.instagram.com/seico.computacion/'
-const emailSubject = encodeURIComponent('Consulta de servicio técnico - SEICO')
-const emailBody = encodeURIComponent('Hola SEICO,\n\nQuiero hacer una consulta sobre mi computadora.\n\nServicio que me interesa:\nDescripción de mi consulta:\n\nEstoy en Bahía Blanca.\n\nGracias.')
-const emailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=net.seico%40gmail.com&su=${emailSubject}&body=${emailBody}`
+const emailComposeUrl = new URL('https://mail.google.com/mail/')
+emailComposeUrl.searchParams.set('view', 'cm')
+emailComposeUrl.searchParams.set('fs', '1')
+emailComposeUrl.searchParams.set('to', 'net.seico@gmail.com')
+emailComposeUrl.searchParams.set('su', 'Consulta de servicio técnico - SEICO')
+emailComposeUrl.searchParams.set('body', 'Hola SEICO,\n\nQuiero hacer una consulta sobre mi computadora.\n\nServicio que me interesa:\nDescripción de mi consulta:\n\nEstoy en Bahía Blanca.\n\nGracias.')
 
 const services = [
   { icon: '⌘', style: 'icon-green', number: '01 / ARMADO', title: 'Armado de PC', description: 'Configuraciones pensadas para el uso que necesitás. Consultá por componentes y presupuesto.', topic: 'Armado de PC' },
@@ -77,7 +80,7 @@ function Process() {
 }
 
 function Contact() {
-  return <section className="contact-section" id="contacto"><div className="wrap contact-panel"><div><div className="eyebrow eyebrow-light"><span className="eyebrow-line" /> ¿Lo vemos juntos?</div><h2>Estamos para<br /><span>ayudarte.</span></h2><p>Escribinos con tu consulta. Te respondemos para orientarte y coordinar.</p></div><div className="contact-actions"><a className="button button-white" href={instagramUrl} target="_blank" rel="noreferrer">Instagram <span>↗</span></a><a className="email-link" href={emailComposeUrl} target="_blank" rel="noreferrer">net.seico@gmail.com <span>↗</span></a><div className="location-label"><span>⌖</span> Bahía Blanca, Buenos Aires</div></div><div className="contact-decor">S</div></div></section>
+  return <section className="contact-section" id="contacto"><div className="wrap contact-panel"><div><div className="eyebrow eyebrow-light"><span className="eyebrow-line" /> ¿Lo vemos juntos?</div><h2>Estamos para<br /><span>ayudarte.</span></h2><p>Escribinos con tu consulta. Te respondemos para orientarte y coordinar.</p></div><div className="contact-actions"><a className="button button-white" href={instagramUrl} target="_blank" rel="noreferrer">Instagram <span>↗</span></a><a className="email-link" href={emailComposeUrl.href} target="_blank" rel="noreferrer">net.seico@gmail.com <span>↗</span></a><div className="location-label"><span>⌖</span> Bahía Blanca, Buenos Aires</div></div><div className="contact-decor">S</div></div></section>
 }
 
 function Footer() {
