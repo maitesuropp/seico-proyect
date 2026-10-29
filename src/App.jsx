@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
+
 const instagramUrl = 'https://www.instagram.com/seico.computacion/'
-const emailComposeUrl = new URL('https://mail.google.com/mail/')
-emailComposeUrl.searchParams.set('view', 'cm')
-emailComposeUrl.searchParams.set('fs', '1')
-emailComposeUrl.searchParams.set('to', 'net.seico@gmail.com')
-emailComposeUrl.searchParams.set('su', 'Consulta de servicio técnico - SEICO')
-emailComposeUrl.searchParams.set('body', 'Hola SEICO,\n\nQuiero hacer una consulta sobre mi computadora.\n\nServicio que me interesa:\nDescripción de mi consulta:\n\nEstoy en Bahía Blanca.\n\nGracias.')
+
 
 const services = [
   { icon: '⌘', style: 'icon-green', number: '01 / ARMADO', title: 'Armado de PC', description: 'Configuraciones pensadas para el uso que necesitás. Consultá por componentes y presupuesto.', topic: 'Armado de PC' },
@@ -79,9 +75,72 @@ function Process() {
   return <section className="process-section" id="como-trabajamos"><div className="wrap section-pad"><div className="center-heading"><div className="eyebrow"><span className="eyebrow-line" /> Simple y transparente</div><h2>Así es el <span>proceso.</span></h2></div><div className="steps">{steps.map(([number, title, description]) => <article key={number}><div className="step-no">{number}</div><div><h3>{title}</h3><p>{description}</p></div></article>)}</div></div></section>
 }
 
+
+
 function Contact() {
-  return <section className="contact-section" id="contacto"><div className="wrap contact-panel"><div><div className="eyebrow eyebrow-light"><span className="eyebrow-line" /> ¿Lo vemos juntos?</div><h2>Estamos para<br /><span>ayudarte.</span></h2><p>Escribinos con tu consulta. Te respondemos para orientarte y coordinar.</p></div><div className="contact-actions"><a className="button button-white" href={instagramUrl} target="_blank" rel="noreferrer">Instagram <span>↗</span></a><a className="email-link" href={emailComposeUrl.href} target="_blank" rel="noreferrer">net.seico@gmail.com <span>↗</span></a><div className="location-label"><span>⌖</span> Bahía Blanca, Buenos Aires</div></div><div className="contact-decor">S</div></div></section>
+  const instagramUrl = "https://www.instagram.com/seico.computacion/"; // Tu URL de Instagram
+
+  // 1. Definimos los textos limpios
+  const asuntoEmail = "Consulta desde la Web - Seico";
+  const mensajeEmail = "Hola equipo de Seico,\n\nMe pongo en contacto con ustedes para realizarles una consulta sobre...\n\nSaludos!";
+
+  // 2. Creamos los parámetros de la URL de forma segura para evitar el bloqueo del navegador
+  const params = new URLSearchParams({
+    view: 'cm',
+    fs: '1',
+    to: 'net.seico@gmail.com',
+    su: asuntoEmail,
+    body: mensajeEmail
+  });
+
+  // 3. Unimos la base de Gmail con los parámetros limpios
+  const gmailWebUrl = new URL('https://mail.google.com/mail/');
+  gmailWebUrl.search = params.toString();
+
+  return (
+    <section className="contact-section" id="contacto">
+      <div className="wrap contact-panel">
+        <div>
+          <div className="eyebrow eyebrow-light">
+            <span className="eyebrow-line" /> ¿Lo vemos juntos?
+          </div>
+          <h2>Estamos para<br /><span>ayudarte.</span></h2>
+          <p>Escribinos con tu consulta. Te respondemos para orientarte y coordinar.</p>
+        </div>
+        
+        <div className="contact-actions">
+          {/* Enlace a Instagram */}
+          <a 
+            className="button button-white" 
+            href={instagramUrl} 
+            target="_blank" 
+            rel="noreferrer"
+          >
+            Instagram <span>↗</span>
+          </a>
+          
+          {/* Enlace directo a Gmail Web optimizado */}
+          <a 
+            className="email-link" 
+            href={gmailWebUrl.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            net.seico@gmail.com <span>↗</span>
+          </a>
+          
+          <div className="location-label">
+            <span>⌖</span> Bahía Blanca, Buenos Aires
+          </div>
+        </div>
+        
+        <div className="contact-decor">S</div>
+      </div>
+    </section>
+  );
 }
+
+
 
 function Footer() {
   return <footer className="site-footer wrap"><Brand footer /><p>Soluciones rápidas y confiables para tu PC.</p><span className="copyright">© 2026 SEICO</span></footer>
@@ -92,4 +151,5 @@ export default function App() {
   function openChat(topic = 'Consulta general') { setChatRequest({ topic, requestId: (chatRequest?.requestId ?? 0) + 1 }) }
   return <><Header openChat={openChat} /><main><Hero openChat={openChat} /><Services openChat={openChat} /><Process /><Contact /></main><Footer /><div className="chat-widget-root">{chatRequest && <AdvisorChat key={chatRequest.requestId} topic={chatRequest.topic} onClose={() => setChatRequest(null)} />}<button className={`chat-launcher${chatRequest ? ' is-open' : ''}`} type="button" onClick={() => chatRequest ? setChatRequest(null) : openChat()} aria-label={chatRequest ? 'Cerrar asesor SEICO' : 'Abrir asesor SEICO'} aria-expanded={Boolean(chatRequest)}><span>{chatRequest ? '×' : '✳'}</span>{!chatRequest && <span className="launcher-label">¿Te ayudamos?</span>}</button></div></>
 }
+
 
