@@ -2,9 +2,6 @@ import { useEffect } from 'react'
 import './App.css'
 
 
-const instagramUrl = 'https://www.instagram.com/seico.computacion/'
-
-
 const services = [
   { icon: '⌘', style: 'icon-green', number: '01 / ARMADO', title: 'Armado de PC', description: 'Configuraciones pensadas para el uso que necesitás. Consultá por componentes y presupuesto.', topic: 'Armado de PC' },
   { icon: '✳', style: 'icon-black', number: '02 / MANTENIMIENTO', title: 'Limpieza y cuidado', description: 'Limpieza de hardware y mantenimiento preventivo para cuidar el rendimiento del equipo.', topic: 'Limpieza o mantenimiento' },
@@ -23,8 +20,8 @@ function Header() {
 function Hero({ openChat }) {
   return <section className="hero wrap" id="inicio">
     <div className="hero-copy">
-      <div className="eyebrow"><span className="eyebrow-line" /> Servicio técnico · Bahía Blanca</div>
-      <h1>Reparar, cuidar<br />y mejorar <span>tu PC.</span></h1>
+      <div className="eyebrow"><span className="eyebrow-line" /> Servicio técnico </div>
+      <h1>Tu PC lista para<br /> <span>rendir al máximo.</span></h1>
       <p className="hero-lede">Armado, mantenimiento y diagnóstico para computadoras de escritorio. Contanos qué necesitás y te orientamos.</p>
       <div className="hero-actions"><button className="button button-primary" onClick={() => openChat()}>Consultar al asistente virtual <span>↗</span></button><a className="text-link" href="#servicios">Ver servicios <span>↓</span></a></div>
       <div className="trust-row"><div className="trust-icon">✳</div><p><strong>Asistente virtual</strong><br />Una primera guía para entender tu consulta.</p><span className="trust-divider" /><div className="trust-icon pin">⌖</div><p><strong>Servicio local</strong><br />Bahía Blanca · Río Gallegos.</p></div>
@@ -138,7 +135,7 @@ function Contact() {
 
 
 function Footer() {
-  return <footer className="site-footer wrap"><Brand footer /><p>Soluciones rápidas y confiables para tu PC.</p><span className="copyright">© 2026 SEICO</span></footer>
+  return <footer className="site-footer wrap"><Brand footer /><p>Soluciones rápidas y confiables para tu PC.</p><span className="copyright">© 2026 SEICO · SERVICIO INTEGRAL DE COMPUTADORA</span></footer>
 }
 
 function openBotpress() {
