@@ -21,13 +21,6 @@ function Header() {
 }
 
 function Hero({ openChat }) {
-  const specialties = [
-    ['01', 'Armado de PC', 'Configuraciones según el uso que necesitás'],
-    ['02', 'Mantenimiento', 'Limpieza y cuidado del equipo'],
-    ['03', 'Diagnóstico', 'Revisión de fallas y próximos pasos'],
-    ['04', 'Sistemas y software', 'Instalaciones para tu computadora'],
-  ]
-
   return <section className="hero wrap" id="inicio">
     <div className="hero-copy">
       <div className="eyebrow"><span className="eyebrow-line" /> Servicio técnico · Bahía Blanca</div>
@@ -36,14 +29,39 @@ function Hero({ openChat }) {
       <div className="hero-actions"><button className="button button-primary" onClick={() => openChat()}>Consultar al asistente virtual <span>↗</span></button><a className="text-link" href="#servicios">Ver servicios <span>↓</span></a></div>
       <div className="trust-row"><div className="trust-icon">✳</div><p><strong>Asistente virtual</strong><br />Una primera guía para entender tu consulta.</p><span className="trust-divider" /><div className="trust-icon pin">⌖</div><p><strong>Servicio local</strong><br />Bahía Blanca · Río Gallegos.</p></div>
     </div>
-    <div className="hero-art" aria-label="Servicios de SEICO">
-      <div className="board-header"><span>SEICO <i>/</i> SERVICIO INTEGRAL</span><span>BAHÍA BLANCA · ARGENTINA</span></div>
-      <div className="board-watermark" aria-hidden="true">PC</div>
-      <div className="board-content">
-        <p className="board-kicker">EN QUÉ PODEMOS AYUDARTE</p>
-        <div className="board-services">{specialties.map(([number, title, detail]) => <div className="board-service" key={number}><span className="board-number">{number}</span><div><strong>{title}</strong><small>{detail}</small></div><span className="board-arrow">↗</span></div>)}</div>
+    <div className="hero-art computer-scene" role="img" aria-label="Computadora de escritorio SEICO con gráficos animados en la pantalla">
+      <div className="scene-label"><span>SEICO</span><i /> COMPUTACIÓN</div>
+      <div className="scene-halo" />
+      <div className="scene-orbit orbit-a" /><div className="scene-orbit orbit-b" />
+      <div className="desktop-set" aria-hidden="true">
+        <div className="desktop-monitor">
+          <div className="monitor-frame">
+            <div className="monitor-screen">
+              <div className="screen-ui">
+                <div className="screen-toolbar"><span className="screen-mark">S</span><span>SEICO <i>/</i> VISUAL</span><b><i /></b></div>
+                <div className="screen-content">
+                  <div className="screen-caption">UNA MIRADA AL INTERIOR</div>
+                  <div className="screen-headline">Tecnología<br /><span>en movimiento.</span></div>
+                  <div className="screen-wave">
+                    <svg viewBox="0 0 360 72" role="presentation" focusable="false"><path className="wave-back" d="M0 39 C24 39 26 26 46 26 S66 52 85 52 109 15 128 15 150 50 171 50 193 28 211 28 234 60 252 60 278 12 298 12 326 39 360 39" /><path className="wave-front" d="M0 39 C24 39 26 26 46 26 S66 52 85 52 109 15 128 15 150 50 171 50 193 28 211 28 234 60 252 60 278 12 298 12 326 39 360 39" /></svg>
+                  </div>
+                  <div className="screen-spectrum">{Array.from({ length: 24 }, (_, index) => <i key={index} className="screen-bar" style={{ "--bar-index": index }} />)}</div>
+                </div>
+                <div className="screen-bottom"><span>HARDWARE</span><span>SOFTWARE</span><span>SEICO ©</span></div>
+              </div>
+            </div>
+            <div className="monitor-chin"><span /><i /></div>
+          </div>
+          <div className="monitor-neck" /><div className="monitor-foot" />
+        </div>
+        <div className="desktop-tower">
+          <div className="tower-top"><i /><i /><i /></div>
+          <div className="tower-front"><div className="tower-light" /><div className="tower-fan"><i /><i /><i /><i /><b /></div><div className="tower-vents"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><div className="tower-port" /></div>
+        </div>
       </div>
-      <div className="board-footer"><span>HARDWARE</span><i /><span>MANTENIMIENTO</span><i /><span>SOFTWARE</span></div>
+      <div className="scene-note note-monitor"><span className="note-dot" /> Servicio para PC de escritorio</div>
+      <span className="scene-cross cross-one">+</span><span className="scene-cross cross-two">+</span>
+      <div className="scene-footer"><span>SEICO · SERVICIO INTEGRAL</span><span>BAHÍA BLANCA</span></div>
     </div>
   </section>
 }
