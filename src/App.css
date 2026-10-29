@@ -66,3 +66,40 @@ html,body,#root{min-height:100%;background:var(--void);color:var(--bone)}body{ba
 .site-header nav a:hover,.site-header nav .nav-assistant:hover,.site-header nav .nav-assistant:focus-visible{color:var(--phosphor)}
 .site-header nav .nav-assistant:focus-visible{outline:1px solid var(--phosphor);outline-offset:6px}
 @media(max-width:900px){.site-header nav a,.site-header nav .nav-assistant{font-size:9px}}
+
+
+/* Movimiento y detalles visuales SEICO */
+.hero h1{will-change:transform,opacity}
+.scene-particle{position:absolute;z-index:1;width:5px;height:5px;border-radius:50%;background:#00e3a0;box-shadow:0 0 14px 4px #00d89266;animation:particle-float 6s ease-in-out infinite}
+.particle-one{top:24%;left:17%}.particle-two{top:67%;right:18%;width:3px;height:3px;animation-delay:-2.1s}.particle-three{top:39%;right:10%;width:4px;height:4px;animation-delay:-4s}
+@keyframes particle-float{0%,100%{transform:translate3d(0,0,0);opacity:.35}50%{transform:translate3d(12px,-18px,0);opacity:1}}
+.service-grid{perspective:1000px}
+.service-card{position:relative;isolation:isolate;overflow:hidden;border-top:1px solid #303a38;transition:background .35s,border-color .35s,box-shadow .35s}
+.service-card:before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;background:radial-gradient(ellipse at 50% 0,#00d8921c,transparent 70%);transition:opacity .35s}
+.service-card:hover,.service-card:focus-within{border-top-color:#00d892;box-shadow:inset 0 1px #00d892,0 10px 28px #00d89214}
+.service-card:hover:before,.service-card:focus-within:before{opacity:1}
+.service-detail{max-height:0;overflow:hidden;opacity:0;transform:translateY(5px);transition:max-height .35s ease,opacity .25s ease,transform .35s ease;color:#b9c7c1!important}
+.service-card:hover .service-detail,.service-card:focus-within .service-detail{max-height:90px;opacity:1;transform:translateY(0)}
+.card-link{width:max-content;display:inline-flex;align-items:center;gap:4px;transition:gap .25s,color .25s}
+.card-link span{transition:transform .25s}.service-card:hover .card-link span,.service-card:focus-within .card-link span{transform:translate(3px,-3px)}
+@media(hover:none){.service-detail{max-height:100px;opacity:1;transform:none}.service-card:active{border-top-color:#00d892;box-shadow:inset 0 1px #00d892,0 8px 20px #00d8921a}}
+.steps{position:relative}
+.steps:before{content:"";position:absolute;top:22px;left:8%;right:8%;height:1px;border:0;background:linear-gradient(90deg,#00d89222,#00d89288,#00d89222);display:block}
+.steps-progress{position:absolute;z-index:0;top:22px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,#00d892,#63ffc5);box-shadow:0 0 10px #00d89288;transform-origin:left center;pointer-events:none}
+.steps article{position:relative;z-index:1;border-top:0!important;background:transparent;align-content:start}
+.step-no{box-shadow:0 0 0 7px var(--void),0 0 18px #00d89233;transition:box-shadow .35s,color .35s,border-color .35s}
+.steps article:hover .step-no{color:#b7ffe7;border-color:var(--phosphor);box-shadow:0 0 0 7px var(--void),0 0 24px #00d89288}
+.contact-section{position:relative;overflow:hidden;padding:26px 0 76px;background:radial-gradient(ellipse at 15% 50%,#073d30 0,transparent 47%),var(--void)}
+.contact-panel{position:relative;isolation:isolate;overflow:hidden;border:1px solid #00d89242;border-radius:3px;background:linear-gradient(115deg,#10251f 0%,#0d1513 58%,#101b17 100%);box-shadow:0 20px 70px #0005;animation:contact-breathe 10s ease-in-out infinite}
+.contact-panel:before{content:"";position:absolute;z-index:-1;inset:-45%;background:radial-gradient(ellipse at 20% 75%,#00d89228,transparent 35%);animation:contact-glow 12s ease-in-out infinite alternate}
+.contact-panel h2{font-size:clamp(44px,6vw,68px);line-height:1.01;letter-spacing:-.06em}
+.contact-panel .button-white{transition:box-shadow .3s,border-color .3s,transform .3s,background .3s}
+.contact-panel .button-white:hover{background:#00d892;color:#06120d;border-color:#7dffd5;box-shadow:0 0 24px #00d89288,0 0 55px #00d89233;transform:translateY(-3px)}
+.contact-panel .button-white:hover span{color:#06120d}
+.contact-decor{z-index:-1!important;right:12px!important;bottom:-100px!important;color:#00d89212!important;text-shadow:0 0 60px #00d89218;user-select:none}
+@keyframes contact-breathe{0%,100%{border-color:#00d89235}50%{border-color:#00d89275}}
+@keyframes contact-glow{from{transform:translateX(-4%)}to{transform:translateX(9%)}}
+@media(max-width:640px){.steps:before{top:16px;bottom:16px;left:21px;right:auto;width:1px;height:auto;background:linear-gradient(#00d89233,#00d89288,#00d89233)}.steps-progress{display:none}.steps article{background:transparent}.contact-section{padding-top:12px}.contact-panel h2{font-size:43px}.contact-decor{right:-45px!important;bottom:-62px!important;font-size:210px!important}}
+@media(prefers-reduced-motion:reduce){.scene-particle,.contact-panel,.contact-panel:before{animation:none!important}.service-card,.service-detail,.contact-panel .button-white{transition:none!important}}
+
+
