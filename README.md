@@ -21,7 +21,7 @@ Para usar el chat con IA en tu computadora, creá un archivo `.env.local` en la 
 AI_GATEWAY_API_KEY=tu_clave_de_ai_gateway
 ```
 
-La clave se crea desde AI Gateway en Vercel. En producción, Vercel puede proporcionar la autenticación del Gateway automáticamente; si el proyecto no la tiene activada, agregá `AI_GATEWAY_API_KEY` como variable de entorno en la configuración del proyecto de Vercel. Nunca pongas la clave en `src/` ni la compartas públicamente. El uso del modelo puede generar cargos según el proveedor y el uso.
+La clave se crea desde AI Gateway en Vercel. En producción, Vercel puede proporcionar la autenticación del Gateway automáticamente; si el proyecto no la tiene activada, agregá `AI_GATEWAY_API_KEY` como variable de entorno en la configuración del proyecto de Vercel. La cuenta también debe tener AI Gateway habilitado; Vercel puede pedir una tarjeta válida para activar créditos gratuitos. Revisá las condiciones y costos vigentes antes de habilitarlo. Nunca pongas la clave en `src/` ni la compartas públicamente. El uso del modelo puede generar cargos según el proveedor y el uso.
 
 ## Guardar cambios en GitHub
 
@@ -44,3 +44,4 @@ El proyecto está conectado a `maitesuropp/seico-proyect`. Vercel detecta Vite; 
 - `npm run build` — compilar la versión lista para publicar en `dist/`.
 - `npm run preview` — revisar localmente la compilación.
 - `vercel dev` — iniciar el front y las funciones `/api` localmente, una vez vinculado el proyecto y configurada la variable de AI Gateway.
+

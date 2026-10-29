@@ -62,7 +62,12 @@ export default async function handler(request, response) {
     })
     return response.status(200).json({ text: result.text })
   } catch (error) {
-    console.error('SEICO AI request failed:', error instanceof Error ? error.message : 'unknown error')
+    const providerMessage = error instanceof Error ? error.message : ''
+    console.error('SEICO AI request failed:', providerMessage || 'unknown error')
+    if (providerMessage.includes('valid credit card')) {
+      return response.status(503).json({ error: 'El asesor con IA todavía no está activado en Vercel. Por ahora, podés continuar la consulta por Instagram.' })
+    }
     return response.status(503).json({ error: 'El asesor no está disponible por el momento.' })
   }
 }
+
