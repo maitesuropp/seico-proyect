@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -6,6 +7,15 @@
     <meta name="theme-color" content="#f6f8f4" />
     <meta name="description" content="Servicio técnico de computadoras de escritorio en Bahía Blanca. Armado, mantenimiento y diagnóstico con SEICO." />
     <link rel="icon" type="image/jpeg" href="/seico-logo.jpg?v=2" />
+    <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+    <script>
+      window.seicoBotpressReady = false;
+      window.botpress.on('webchat:initialized', () => {
+        window.seicoBotpressReady = true;
+        window.dispatchEvent(new Event('seico-botpress-ready'));
+      });
+    </script>
+    <script src="https://files.bpcontent.cloud/2026/10/29/05/20261029053741-37RAUGZA.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
