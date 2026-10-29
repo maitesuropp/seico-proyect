@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import './App.css'
 
 
 const services = [
-  { icon: '⌘', style: 'icon-green', number: '01 / ARMADO', title: 'Armado de PC', description: 'Configuraciones pensadas para el uso que necesitás. Consultá por componentes y presupuesto.', topic: 'Armado de PC' },
-  { icon: '✳', style: 'icon-black', number: '02 / MANTENIMIENTO', title: 'Limpieza y cuidado', description: 'Limpieza de hardware y mantenimiento preventivo para cuidar el rendimiento del equipo.', topic: 'Limpieza o mantenimiento' },
-  { icon: '⌕', style: 'icon-soft', number: '03 / DIAGNÓSTICO', title: 'Revisión técnica', description: 'Identificamos posibles causas de fallas y te orientamos sobre los próximos pasos.', topic: 'Diagnóstico de una falla' },
-  { icon: '▤', style: 'icon-outline', number: '04 / SOFTWARE', title: 'Sistemas y software', description: 'Instalación de sistemas operativos y programas según las necesidades de tu PC.', topic: 'Sistema o software' },
+  { icon: '⌘', style: 'icon-green', number: '01 / ARMADO', title: 'Armado de PC', description: 'Configuraciones pensadas para el uso que necesitás. Consultá por componentes y presupuesto.', detail: 'Te ayudamos a pensar una configuración según el uso que le vas a dar.', topic: 'Armado de PC' },
+  { icon: '✳', style: 'icon-black', number: '02 / MANTENIMIENTO', title: 'Limpieza y cuidado', description: 'Limpieza de hardware y mantenimiento preventivo para cuidar el rendimiento del equipo.', detail: 'Un mantenimiento periódico puede ayudar a prevenir problemas y cuidar los componentes.', topic: 'Limpieza o mantenimiento' },
+  { icon: '⌕', style: 'icon-soft', number: '03 / DIAGNÓSTICO', title: 'Revisión técnica', description: 'Identificamos posibles causas de fallas y te orientamos sobre los próximos pasos.', detail: 'Contanos qué observás; la revisión completa se realiza sobre el equipo.', topic: 'Diagnóstico de una falla' },
+  { icon: '▤', style: 'icon-outline', number: '04 / SOFTWARE', title: 'Sistemas y software', description: 'Instalación de sistemas operativos y programas según las necesidades de tu PC.', detail: 'Consultanos qué sistema o programa necesitás instalar.', topic: 'Sistema o software' },
 ]
 
 function Brand({ footer = false }) {
@@ -18,24 +19,29 @@ function Header({ openChat }) {
 }
 
 function Hero({ openChat }) {
+  const sceneRef = useRef(null)
+  const prefersReducedMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: sceneRef, offset: ['start end', 'end start'] })
+  const sceneY = useTransform(scrollYProgress, [0, 1], [18, -18])
+
   return <section className="hero wrap" id="inicio">
     <div className="hero-copy">
       <div className="eyebrow"><span className="eyebrow-line" /> Servicio técnico </div>
-      <h1>Tu PC lista para<br /> <span>rendir al máximo.</span></h1>
+      <motion.h1 initial={prefersReducedMotion ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}>Tu PC lista para<br /> <span>rendir al máximo.</span></motion.h1>
       <p className="hero-lede">Armado, mantenimiento y diagnóstico para computadoras de escritorio. Contanos qué necesitás y te orientamos.</p>
       <div className="hero-actions"><button className="button button-primary" onClick={() => openChat()}>Consultar al asistente virtual <span>↗</span></button><a className="text-link" href="#servicios">Ver servicios <span>↓</span></a></div>
       <div className="trust-row"><div className="trust-icon">✳</div><p><strong>Asistente virtual</strong><br />Una primera guía para entender tu consulta.</p><span className="trust-divider" /><div className="trust-icon pin">⌖</div><p><strong>Servicio local</strong><br />Bahía Blanca · Río Gallegos.</p></div>
     </div>
-    <div className="hero-art computer-scene" role="img" aria-label="Computadora de escritorio SEICO con gráficos animados en la pantalla">
+    <motion.div ref={sceneRef} style={{ y: prefersReducedMotion ? 0 : sceneY }} className="hero-art computer-scene" role="img" aria-label="Ilustración animada de una computadora de escritorio SEICO">
       <div className="scene-label"><span>SEICO</span><i /> COMPUTACIÓN</div>
-      <div className="scene-halo" />
+      <div className="scene-halo" /><span className="scene-particle particle-one" aria-hidden="true" /><span className="scene-particle particle-two" aria-hidden="true" /><span className="scene-particle particle-three" aria-hidden="true" />
       <div className="scene-orbit orbit-a" /><div className="scene-orbit orbit-b" />
       <div className="desktop-set" aria-hidden="true">
         <div className="desktop-monitor">
           <div className="monitor-frame">
             <div className="monitor-screen">
               <div className="screen-ui">
-                <div className="screen-toolbar"><span className="screen-mark">S</span><span>SEICO <i>/</i> VISUAL</span><b><i /></b></div>
+                <div className="screen-toolbar"><span className="screen-mark">S</span><span>SEICO <i>/</i> EQUIPO</span><b><i /></b></div>
                 <div className="screen-content">
                   <div className="screen-caption">UNA MIRADA AL INTERIOR</div>
                   <div className="screen-headline">Tecnología<br /><span>en movimiento.</span></div>
@@ -44,7 +50,7 @@ function Hero({ openChat }) {
                   </div>
                   <div className="screen-spectrum">{Array.from({ length: 24 }, (_, index) => <i key={index} className="screen-bar" style={{ "--bar-index": index }} />)}</div>
                 </div>
-                <div className="screen-bottom"><span>HARDWARE</span><span>SOFTWARE</span><span>SEICO ©</span></div>
+                <div className="screen-bottom"><span>EQUIPO</span><span>PROGRAMAS</span><span>SEICO ©</span></div>
               </div>
             </div>
             <div className="monitor-chin"><span /><i /></div>
@@ -58,27 +64,29 @@ function Hero({ openChat }) {
       </div>
       <span className="scene-cross cross-one">+</span><span className="scene-cross cross-two">+</span>
       <div className="scene-footer"><span>SEICO · SERVICIO INTEGRAL</span></div>
-    </div>
+    </motion.div>
   </section>
 }
 
 function Services({ openChat }) {
-  return <section className="services-section" id="servicios"><div className="wrap section-pad"><div className="section-heading reveal" data-reveal><div><div className="eyebrow"><span className="eyebrow-line" /> Qué podemos hacer</div><h2>Soluciones para que<br />tu equipo <span>funcione bien.</span></h2></div><p>Revisamos cada caso con atención y te explicamos las opciones antes de realizar cualquier trabajo.</p></div><div className="service-grid">{services.map((service) => <article className="service-card reveal" data-reveal key={service.number}><div className={`service-icon ${service.style}`}>{service.icon}</div><div className="card-number">{service.number}</div><h3>{service.title}</h3><p>{service.description}</p><button className="card-link" onClick={() => openChat()}>Consultar servicio <span>↗</span></button></article>)}</div></div></section>
+  const prefersReducedMotion = useReducedMotion()
+  return <section className="services-section" id="servicios"><div className="wrap section-pad"><motion.div className="section-heading" initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.55 }}><div><div className="eyebrow"><span className="eyebrow-line" /> Qué podemos hacer</div><h2>Soluciones para que<br />tu equipo <span>funcione bien.</span></h2></div><p>Revisamos cada caso con atención y te explicamos las opciones antes de realizar cualquier trabajo.</p></motion.div><div className="service-grid">{services.map((service, index) => <motion.article className="service-card" key={service.number} initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : index * 0.09 }} whileHover={prefersReducedMotion ? undefined : { y: -7, scale: 1.015 }} whileTap={{ scale: 0.99 }}><motion.div className={`service-icon ${service.style}`} whileHover={prefersReducedMotion ? undefined : { rotate: -8, scale: 1.08 }} transition={{ type: 'spring', stiffness: 320, damping: 16 }}>{service.icon}</motion.div><div className="card-number">{service.number}</div><h3>{service.title}</h3><p>{service.description}</p><p className="service-detail">{service.detail}</p><button className="card-link" onClick={() => openChat()} aria-label={`Consultar por ${service.title}`}>Consultar servicio <span>↗</span></button></motion.article>)}</div></div></section>
 }
 
 function Process() {
-  const steps = [['01', 'Nos contás', 'Describís lo que necesitás en una conversación simple.'], ['02', 'Te orientamos', 'La IA te ayuda con una primera guía, sin inventar precios ni disponibilidad.'], ['03', 'Seguimos por Instagram', 'Copiás la consulta y nos escribís para coordinar los próximos pasos.']]
-  return <section className="process-section" id="como-trabajamos"><div className="wrap section-pad"><div className="center-heading reveal" data-reveal><div className="eyebrow"><span className="eyebrow-line" /> Simple y transparente</div><h2>Así es el <span>proceso.</span></h2></div><div className="steps">{steps.map(([number, title, description]) => <article className="reveal" data-reveal key={number}><div className="step-no">{number}</div><div><h3>{title}</h3><p>{description}</p></div></article>)}</div></div></section>
+  const prefersReducedMotion = useReducedMotion()
+  const steps = [['01', 'Nos contás qué necesitás', 'Describís el problema o el servicio que estás buscando.'], ['02', 'Analizamos tu consulta', 'El asistente virtual te brinda una primera orientación con inteligencia artificial.'], ['03', 'Coordinamos los próximos pasos', 'Si hace falta una revisión, seguimos la conversación por Instagram.']]
+  return <section className="process-section" id="como-trabajamos"><div className="wrap section-pad"><motion.div className="center-heading" initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}><div className="eyebrow"><span className="eyebrow-line" /> Simple y transparente</div><h2>Así es el <span>proceso.</span></h2></motion.div><div className="steps"><motion.span className="steps-progress" aria-hidden="true" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true, amount: 0.75 }} transition={{ duration: prefersReducedMotion ? 0 : 1.1, ease: 'easeOut' }} />{steps.map(([number, title, description], index) => <motion.article key={number} initial={prefersReducedMotion ? false : { opacity: 0, x: index % 2 ? 22 : -22 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.55, delay: prefersReducedMotion ? 0 : index * 0.12 }}><div className="step-no">{number}</div><div><h3>{title}</h3><p>{description}</p></div></motion.article>)}</div></div></section>
 }
 
 
-
 function Contact() {
+  const prefersReducedMotion = useReducedMotion()
   const instagramUrl = "https://www.instagram.com/seico.computacion/"; // Tu URL de Instagram
 
   // 1. Definimos los textos limpios
-  const asuntoEmail = "Consulta desde la Web - Seico";
-  const mensajeEmail = "Hola equipo de Seico,\n\nMe pongo en contacto con ustedes para realizarles una consulta sobre...\n\nSaludos!";
+  const asuntoEmail = "Consulta desde la web - SEICO";
+  const mensajeEmail = "Hola SEICO,\n\nQuisiera consultarles sobre...\n\nMi consulta: ";
 
   // 2. Creamos los parámetros de la URL de forma segura para evitar el bloqueo del navegador
   const params = new URLSearchParams({
@@ -95,7 +103,7 @@ function Contact() {
 
   return (
     <section className="contact-section" id="contacto">
-      <div className="wrap contact-panel reveal" data-reveal>
+      <motion.div className="wrap contact-panel" initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.65 }}>
         <div>
           <div className="eyebrow eyebrow-light">
             <span className="eyebrow-line" /> ¿Lo vemos juntos?
@@ -112,7 +120,7 @@ function Contact() {
             target="_blank" 
             rel="noreferrer"
           >
-            Instagram <span>↗</span>
+            Escribir por Instagram <span>↗</span>
           </a>
           
           {/* Enlace directo a Gmail Web optimizado */}
@@ -122,12 +130,12 @@ function Contact() {
             target="_blank"
             rel="noreferrer"
           >
-            net.seico@gmail.com <span>↗</span>
+            Escribir por correo <span>↗</span>
           </a>
           
         </div>
-        <div className="contact-decor">S</div>
-      </div>
+        <motion.div className="contact-decor" aria-hidden="true" animate={prefersReducedMotion ? undefined : { rotate: [0, 4, -3, 0], scale: [1, 1.04, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}>S</motion.div>
+      </motion.div>
     </section>
   );
 }
@@ -164,3 +172,5 @@ export default function App() {
 
   return <><Header openChat={openBotpress} /><main><Hero openChat={openBotpress} /><Services openChat={openBotpress} /><Process /><Contact /></main><Footer /></>
 }
+
+
