@@ -36,7 +36,9 @@ function AdvisorChat({ topic, onClose }) {
   const [error, setError] = useState('')
   const endRef = useRef(null)
 
-  useEffect(() => endRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages, busy])
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, busy])
 
   async function sendMessage(text = input) {
     const content = text.trim()
@@ -84,3 +86,4 @@ export default function App() {
   function openChat(topic = 'Consulta general') { setChatRequest({ topic, requestId: (chatRequest?.requestId ?? 0) + 1 }) }
   return <><Header openChat={openChat} /><main><Hero openChat={openChat} /><Services openChat={openChat} /><Process /><Contact /></main><Footer /><div className="chat-widget-root">{chatRequest && <AdvisorChat key={chatRequest.requestId} topic={chatRequest.topic} onClose={() => setChatRequest(null)} />}<button className={`chat-launcher${chatRequest ? ' is-open' : ''}`} type="button" onClick={() => chatRequest ? setChatRequest(null) : openChat()} aria-label={chatRequest ? 'Cerrar asesor SEICO' : 'Abrir asesor SEICO'} aria-expanded={Boolean(chatRequest)}><span>{chatRequest ? '×' : '✳'}</span>{!chatRequest && <span className="launcher-label">¿Te ayudamos?</span>}</button></div></>
 }
+
