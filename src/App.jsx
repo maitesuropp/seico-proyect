@@ -13,8 +13,8 @@ function Brand({ footer = false }) {
   return <a className={`brand-logo-link${footer ? ' footer-brand' : ''}`} href="#inicio" aria-label="SEICO, inicio"><span className="brand-logo-crop"><img src="/seico-logo.jpg" alt="SEICO | Servicio Integral de Computadoras" /></span></a>
 }
 
-function Header() {
-  return <><div className="announcement"><span className="status-dot" /> Atención para computadoras </div><header className="site-header wrap"><Brand /><nav aria-label="Navegación principal"><a href="#servicios">Servicios</a><a href="#como-trabajamos">Cómo trabajamos</a><a href="#contacto">Contacto</a></nav></header></>
+function Header({ openChat }) {
+  return <><div className="announcement"><span className="status-dot" /> Atención para computadoras </div><header className="site-header wrap"><a className="header-wordmark" href="#inicio" aria-label="SEICO, inicio"><span>SEICO</span><small>SERVICIO TÉCNICO</small></a><nav aria-label="Navegación principal"><a href="#servicios">Servicios</a><a href="#como-trabajamos">Cómo trabajamos</a><a href="#contacto">Contacto</a><button className="nav-assistant" type="button" onClick={openChat}>Asistente virtual <span>↗</span></button></nav></header></>
 }
 
 function Hero({ openChat }) {
@@ -162,5 +162,5 @@ export default function App() {
     return () => observer.disconnect()
   }, [])
 
-  return <><Header /><main><Hero openChat={openBotpress} /><Services openChat={openBotpress} /><Process /><Contact /></main><Footer /></>
+  return <><Header openChat={openBotpress} /><main><Hero openChat={openBotpress} /><Services openChat={openBotpress} /><Process /><Contact /></main><Footer /></>
 }
