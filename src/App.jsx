@@ -23,16 +23,18 @@ function Hero({ openChat }) {
   const prefersReducedMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: sceneRef, offset: ['start end', 'end start'] })
   const sceneY = useTransform(scrollYProgress, [0, 1], [18, -18])
+  const copyVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: prefersReducedMotion ? 0 : 0.12, delayChildren: prefersReducedMotion ? 0 : 0.04 } } }
+  const copyItemVariants = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1] } } }
 
   return <section className="hero wrap" id="inicio">
-    <div className="hero-copy">
-      <div className="eyebrow"><span className="eyebrow-line" /> Servicio técnico </div>
-      <motion.h1 initial={prefersReducedMotion ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}>Tu PC lista para<br /> <span>rendir al máximo.</span></motion.h1>
-      <p className="hero-lede">Armado, mantenimiento y diagnóstico para computadoras de escritorio. Contanos qué necesitás y te orientamos.</p>
-      <div className="hero-actions"><button className="button button-primary" onClick={() => openChat()}>Consultar al asistente virtual <span>↗</span></button><a className="text-link" href="#servicios">Ver servicios <span>↓</span></a></div>
-      <div className="trust-row"><div className="trust-icon">✳</div><p><strong>Asistente virtual</strong><br />Una primera guía para entender tu consulta.</p><span className="trust-divider" /><div className="trust-icon pin">⌖</div><p><strong>Servicio local</strong><br />Bahía Blanca · Río Gallegos.</p></div>
-    </div>
-    <motion.div ref={sceneRef} style={{ y: prefersReducedMotion ? 0 : sceneY }} className="hero-art computer-scene" role="img" aria-label="Ilustración animada de una computadora de escritorio SEICO">
+    <motion.div className="hero-copy" variants={copyVariants} initial={prefersReducedMotion ? false : 'hidden'} animate="visible">
+      <motion.div className="eyebrow" variants={copyItemVariants}><span className="eyebrow-line" /> Servicio técnico </motion.div>
+      <motion.h1 variants={copyItemVariants}>Tu PC lista para<br /> <span>rendir al máximo.</span></motion.h1>
+      <motion.p className="hero-lede" variants={copyItemVariants}>Armado, mantenimiento y diagnóstico para computadoras de escritorio. Contanos qué necesitás y te orientamos.</motion.p>
+      <motion.div className="hero-actions" variants={copyItemVariants}><button className="button button-primary" onClick={() => openChat()}>Consultar al asistente virtual <span>↗</span></button><a className="text-link" href="#servicios">Ver servicios <span>↓</span></a></motion.div>
+      <motion.div className="trust-row" variants={copyItemVariants}><div className="trust-icon">✳</div><p><strong>Asistente virtual</strong><br />Una primera guía para entender tu consulta.</p><span className="trust-divider" /><div className="trust-icon pin">⌖</div><p><strong>Servicio local</strong><br />Bahía Blanca · Río Gallegos.</p></motion.div>
+    </motion.div>
+    <motion.div ref={sceneRef} initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.975, x: 14 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ duration: 0.85, delay: prefersReducedMotion ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }} style={{ y: prefersReducedMotion ? 0 : sceneY }} className="hero-art computer-scene" role="img" aria-label="Ilustración animada de una computadora de escritorio SEICO">
       <div className="scene-label"><span>SEICO</span><i /> COMPUTACIÓN</div>
       <div className="scene-halo" /><span className="scene-particle particle-one" aria-hidden="true" /><span className="scene-particle particle-two" aria-hidden="true" /><span className="scene-particle particle-three" aria-hidden="true" />
       <div className="scene-orbit orbit-a" /><div className="scene-orbit orbit-b" />
@@ -143,7 +145,7 @@ function Contact() {
 
 
 function Footer() {
-  return <footer className="site-footer wrap"><Brand footer /><p>Soluciones rápidas y confiables para tu PC.</p><span className="copyright">© 2026 SEICO · SERVICIO INTEGRAL DE COMPUTADORA</span></footer>
+  return <footer className="site-footer wrap"><Brand footer /><p>Soluciones rápidas y confiables para tu PC.</p><span className="copyright">© 2026 SEICO · T</span></footer>
 }
 
 function openBotpress() {
@@ -172,5 +174,6 @@ export default function App() {
 
   return <><Header openChat={openBotpress} /><main><Hero openChat={openBotpress} /><Services openChat={openBotpress} /><Process /><Contact /></main><Footer /></>
 }
+
 
 
