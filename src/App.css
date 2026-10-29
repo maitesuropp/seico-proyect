@@ -56,3 +56,13 @@ html,body,#root{min-height:100%;background:var(--void);color:var(--bone)}body{ba
 .reveal{transition:opacity .65s ease,transform .65s cubic-bezier(.2,.65,.25,1)}.reveal.is-visible{transition-delay:0s}.chat-launcher{border-radius:1px;background:#005441;color:var(--phosphor);box-shadow:0 0 0 1px #00d89255;font:400 10px var(--font-mono);letter-spacing:.04em;text-transform:uppercase}.chat-launcher:hover{background:#006d52;transform:translateY(-2px)}.chat-launcher.is-open{border-radius:1px;background:#002923}.chat-launcher>span:first-child{font-size:18px}
 @media(max-width:900px){.hero{grid-template-columns:1fr 1fr;gap:24px;min-height:540px}.hero-art.computer-scene{height:430px}.site-header nav{gap:20px}.site-header nav a{font-size:8px}}@media(max-width:640px){.site-header{height:70px}.announcement{font-size:8px}.hero{padding-top:40px;padding-bottom:50px}.hero-art.computer-scene{height:390px}.trust-row p{color:#8d9692}.service-card{background:#111618}.contact-panel{background:#121817}}
 @media(prefers-reduced-motion:reduce){.scene-halo,.scene-orbit,.desktop-set,.tower-fan,.tower-fan i,.screen-bar,.wave-front,.scene-cross{animation:none!important}}
+/* Encabezado: marca tipográfica y navegación más legible */
+.header-wordmark{display:flex;flex-direction:column;gap:5px;text-decoration:none;color:var(--phosphor);font:400 20px/1 var(--font-mono);letter-spacing:.12em}
+.header-wordmark small{color:#858e8b;font:400 7px/1 var(--font-mono);letter-spacing:.13em}
+.site-header nav{gap:clamp(18px,2.3vw,32px)}
+.site-header nav a,.site-header nav .nav-assistant{color:#b5bcba;font:400 11px var(--font-mono);letter-spacing:.09em;text-transform:uppercase;transition:color .2s}
+.site-header nav .nav-assistant{display:inline-flex;align-items:center;gap:7px;padding:0;border:0;background:none;cursor:pointer}
+.site-header nav .nav-assistant span{color:var(--phosphor)}
+.site-header nav a:hover,.site-header nav .nav-assistant:hover,.site-header nav .nav-assistant:focus-visible{color:var(--phosphor)}
+.site-header nav .nav-assistant:focus-visible{outline:1px solid var(--phosphor);outline-offset:6px}
+@media(max-width:900px){.site-header nav a,.site-header nav .nav-assistant{font-size:9px}}
