@@ -59,9 +59,8 @@ function Hero({ openChat }) {
           <div className="tower-front"><div className="tower-light" /><div className="tower-fan"><i /><i /><i /><i /><b /></div><div className="tower-vents"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><div className="tower-port" /></div>
         </div>
       </div>
-      <div className="scene-note note-monitor"><span className="note-dot" /> Servicio para PC de escritorio</div>
       <span className="scene-cross cross-one">+</span><span className="scene-cross cross-two">+</span>
-      <div className="scene-footer"><span>SEICO · SERVICIO INTEGRAL</span><span>BAHÍA BLANCA</span></div>
+      <div className="scene-footer"><span>SEICO · SERVICIO INTEGRAL</span></div>
     </div>
   </section>
 }
